@@ -1,0 +1,3 @@
+[31-Mar-2015 12:15:25 UTC] PHP Fatal error:  Call to undefined function base_url() in /home/k1295122/public_html/store/application/views/signin.php on line 11
+[31-Mar-2015 12:15:25 UTC] PHP Fatal error:  Call to undefined function base_url() in /home/k1295122/public_html/store/application/views/transaction.php on line 9
+[31-Mar-2015 12:15:25 UTC] PHP Fatal error:  Call to undefined function base_url() in /home/k1295122/public_html/store/application/views/view.php on line 11

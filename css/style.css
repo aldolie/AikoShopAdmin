@@ -1,0 +1,131 @@
+.form_product_update{
+	width:400px;
+}
+
+
+.form_upload{
+	width:250px;
+}
+
+.autocomplete_container{
+	position:relative;
+}
+
+.autocomplete_content{
+	position:absolute;background:white;z-index:2;width:100%;
+
+}
+
+.autocomplete{
+	background:white;
+	padding:10px;
+
+}
+
+.autocomplete:hover,.autocomplete:first-child{
+	 color: #31708f;
+	  background-color: #d9edf7;
+	  border-color: #bce8f1;
+}
+#nbr-toogle{
+	display:none;
+}
+
+#nbr{
+	display:block ;
+}
+
+@media (max-width: 767px) {
+  #nbr{
+		display:none ;
+   }
+   
+   #nbr-toogle{
+	display:inline-block;
+}
+
+}
+
+
+
+#form-login{
+	margin-top:200px;
+}
+
+.form-none{
+	border-radius:0px;
+	padding:5px 10px;
+	font-size: 14px;
+}
+
+.heading-title{
+	color:#F16060; !important;
+	text-transform: uppercase;
+	font-size: 42px;
+	font-family: Impact, Charcoal, sans-serif;
+	letter-spacing: 5px;
+	text-shadow:1px 1px 1px #ccc,-1px -1px 1px #ccc;
+}
+
+.btn-none{
+	background-color: #F16060;
+	color:#000;
+	border-radius: 0px;
+	text-transform: uppercase;
+	font-family: 'Consolas';
+}
+
+.small{
+	width: 100px;
+	font-size: 14px;
+}
+
+.medium{
+	width: 150px;
+	font-size: 16px;
+}
+
+.large{
+	width: 200px;
+	font-size: 18px;
+	padding: 10px 15px;
+}
+
+.all{
+	display: block;
+	width: 100%;
+}
+
+.center-align{
+	text-align: center;
+}
+
+.navbar-inverse{
+	background-color: white;
+	border:none;
+	box-shadow: 1px 0px 1px #F16060;
+
+}
+
+.navbar-inverse *{
+	color:#5f5f5f !important;
+}
+
+#sidebar-wrapper{
+	background-color: white;
+	box-shadow: 0px 1px 1px #F16060;
+}
+.sidebar-nav li a{
+	color:#5f5f5f;
+}
+
+.sidebar-nav li a:hover{
+	color:#3f3f3f;
+}
+
+h1,h2,h3,h4,h5,h6{
+	color:#F16060; !important;
+	font-family: Impact, Charcoal, sans-serif;
+	letter-spacing: 5px;
+	text-shadow:1px 1px 1px #ccc,-1px -1px 1px #ccc;
+}

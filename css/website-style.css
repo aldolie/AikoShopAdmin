@@ -1,0 +1,95 @@
+
+  * {
+    margin: 0;
+    
+  }
+  html, body {
+    height: 100%;
+  }
+  .page-wrap {
+    min-height: 100%;
+    /* equal to footer height */
+    margin-bottom: -250px; 
+    padding: 30px 0px;
+  }
+  .page-wrap:after {
+    content: "";
+    display: block;
+  }
+  .site-footer, .page-wrap:after {
+    height: 250px; 
+  }
+  .site-footer {
+    background: #428bca;
+  }
+
+  #home_slider{
+      
+  }
+
+  .vindy-icon{
+    width: 80px;  
+    margin-top: -15px;
+  }
+
+  #home_slider:before,#home_newest_product:before,#home_customer_testimony:before{
+    font-size: 28px;
+    text-align: center;
+    margin: 0px auto;
+    border-bottom:5px solid #333;
+    font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    width: 100%;
+  }
+  #home_slider:before{
+    content: "Our Recommendation"
+  }
+  #home_newest_product:before{
+    content:"Our Newest Product";
+  }
+  #home_customer_testimony:before{
+    content:"Our Customer's Testmony";
+  }
+
+  #home_customer_testimony{
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+  }
+  #home_newest_product{
+    margin-top: 100px;
+  }
+  .home_customer_testimonies{
+
+  }
+  .home_customer_testimony_image{text-align: center;
+      border:5px solid #333; 
+      width: 150px;
+      height: 150px;
+      margin: 0px auto; 
+      border-radius:50%;
+      display: block;
+    }
+  .home_customer_testimony_column{
+    display: inline-block;
+     vertical-align:top; 
+   }
+  .home_customer_testimony_column_name{
+      font-weight: bold;
+      text-align: center;
+      width: 100%;
+      font-family: century ;
+      font-size: 22px;
+      display: block;
+      margin:8px 0px;
+  }
+  .home_customer_testimony_column_content{
+    font-family: sans-serif;
+    font-size: 16px;
+  }
+  .home_customer_testimony_column_content:before,.home_customer_testimony_column_content:after{
+    content: "\"";
+    font-family: "Times New Roman";
+    font-size: 24px;
+  }
