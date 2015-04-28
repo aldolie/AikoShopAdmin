@@ -1,6 +1,6 @@
  <div class="container-fluid" ng-controller="ReportController">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12" ng-cloak>
                         <h1>{{ heading }}</h1>
 						
 						
@@ -51,7 +51,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="tr in transaction">
+								<tr ng-repeat="tr in transaction" ng-cloak>
 									<td>{{tr.transactiondate}}</td>
 									<td>{{tr.username}}</td>
 									<td>{{tr.nama}}</td>

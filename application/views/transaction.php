@@ -18,7 +18,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr ng-repeat="pr in elementChecked">
+									<tr ng-repeat="pr in elementChecked" ng-cloak>
 										<td>{{pr.productname}}</td>
 										<td>{{pr.harga | currency:"Rp."}}</td>
 										<td>{{pr.quantity }}</td>
@@ -29,7 +29,7 @@
 							</table>
 
 								<table class="table" >
-									<tr >
+									<tr ng-cloak>
 										<td  width="50px">Total<td>
 										<td>&nbsp;:<td>
 										<td colspan="2"><div>{{countTotal() | currency:"Rp."}}</div></td>
@@ -71,7 +71,7 @@
 								<div class="col-sm-8 autocomplete_container" >
 									<input type="text" ng-model="form.username"  class="form-control" placeholder="Username" name="username"  ng-change="onUsernameChange()" autocomplete="off" ng-enter="chooseUser()" />
 									<div  class="autocomplete_content">
-										<div ng-repeat="user in filteredUser track by $index"  class="autocomplete" ng-click="chooseUserClick($index)">
+										<div ng-repeat="user in filteredUser track by $index" ng-cloak  class="autocomplete" ng-click="chooseUserClick($index)">
 										{{user.username}}
 										</div>
 									</div>
@@ -85,7 +85,7 @@
 								<div class="col-sm-8 autocomplete_container">
 									<input type="text" ng-model="form.productname"  class="form-control" placeholder="Name" name="name" ng-change="onProductChange()" ng-enter="chooseProduct()" autocomplete="off" />
 									<div  class="autocomplete_content">
-									<div ng-repeat="product in filteredProducts track by $index"  class="autocomplete" ng-click="chooseProductClick($index)">
+									<div ng-repeat="product in filteredProducts track by $index" ng-cloak  class="autocomplete" ng-click="chooseProductClick($index)">
 										{{product.productname}}
 									</div>
 								</div>
@@ -97,7 +97,7 @@
 								<label for="Quantity" class="col-sm-4">Quantity</label>
 								<div class="col-sm-8">
 									<input type="quantity" ng-model="form.quantity"  class="form-control" placeholder="Quantity" name="email"   />
-									<p style="margin-top:10px;">Stock : {{productTemp.stock}}</p>
+									<p style="margin-top:10px;" ng-cloak>Stock : {{productTemp.stock}}</p>
 								</div>
 							</div>
 							
@@ -109,7 +109,7 @@
 							</div>
 						</form>
 						
-						<ul class="nav nav-tabs nav-justified" style="margin-bottom:10px;">
+						<ul class="nav nav-tabs nav-justified" style="margin-bottom:10px;" ng-cloak>
 						  <li role="presentation" ng-class="isActive('User')" ng-click="changeToMode('User')"><a href="#">User</a></li>
 						  <li role="presentation"ng-class="isActive('Product')" ng-click="changeToMode('Product')"><a href="#">Product</a></li>
 						</ul>
@@ -135,7 +135,7 @@
 									<th>Alamat</th>
 								</tr>
 							</thead>
-							<tbody ng-repeat="tr in filteredTransaction" ng-controller="TrDetailController" ng-show="isAvailable()">
+							<tbody ng-repeat="tr in filteredTransaction" ng-cloak ng-controller="TrDetailController" ng-show="isAvailable()">
 								
 								<tr>
 									
@@ -177,7 +177,7 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr  ng-repeat="dt in tr.detail track by $index" ng-controller="TransactionDetailController">
+												<tr  ng-repeat="dt in tr.detail track by $index" ng-cloak ng-controller="TransactionDetailController">
 													<td><input type="checkbox" ng-model="dt.checked" ng-init="dt.checked=false"/> </td>
 													<td>{{dt.transactionid}} </td>
 													<td>{{dt.created_at}}</td>

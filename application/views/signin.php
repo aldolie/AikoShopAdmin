@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,7 +40,7 @@
                     <div class="alert alert-danger" role="alert"><?php echo $error; ?></div>
                 <?php } ?>
         
-            <form class="form-horizontal" ng-controller="StaffController" action="<?php echo base_url('signin/action'); ?>" method="post">
+                    <form class="form-horizontal" ng-controller="StaffController" action="<?php echo base_url('signin/action'); ?>" method="post">
           
                         <div class="form-group">
                             <div class="col-md-12">

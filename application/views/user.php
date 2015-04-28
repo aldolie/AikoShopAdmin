@@ -1,6 +1,6 @@
  <div class="container-fluid" ng-controller="UserController">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12" ng-cloak>
                         <h1 style="display:inline-block;vertical-align:top;">{{ heading }}</h1>
 						<span style="vertical-align:top;margin-bottom:10px;margin-top:20px;margin-left:10px;background:#eee;cursor:pointer;padding:10px;border-radius:5px;" title="Insert User" ng-click="showInsert()" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 									
@@ -72,7 +72,7 @@
 							</thead>
 							<tbody ng-repeat="user in filteredUsers" ng-controller="UserDetailController" >
 								
-								<tr>
+								<tr ng-cloak>
 									<td>{{ user.userid }}</td>
 									<td>{{ user.username }}</td>
 									<td>{{ user.nama }}</td>

@@ -1,6 +1,6 @@
  <div class="container-fluid" ng-controller="RecapitulationController">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12" ng-cloak>
                         <h1>{{ heading }}</h1>
 						
 						
@@ -37,7 +37,7 @@
 							</thead>
 							<tbody ng-repeat="tr in filteredTransaction" ng-controller="RecapDetailController" ng-show="isAvailable()">
 								
-								<tr>
+								<tr ng-cloak>
 									
 									<td ng-init="detailStatus=false">
 										<button class="btn" ng-hide="detailStatus" style="padding:0px;background:transparent;" title="Show Detail" ng-click="showDetail()">

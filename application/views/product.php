@@ -2,8 +2,8 @@
 			
 			
 			<div class="row">
-                    <div class="col-lg-12">
-                        <h1 style="display:inline-block;vertical-align:top;">{{ heading }}</h1>
+                    <div class="col-lg-12" ng-cloak>
+                        <h1 style="display:inline-block;vertical-align:top;" >{{ heading }}</h1>
 						<span style="vertical-align:top;margin-bottom:10px;margin-top:20px;margin-left:10px;background:#eee;cursor:pointer;padding:10px;border-radius:5px;" title="Insert Product" ng-click="showInsert()" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 									
 						<form ng-show="insertFlag" class="form_product_update form-horizontal" ng-submit="insert()">
@@ -86,7 +86,7 @@
 							</div>
 						</form>
 						
-						<div class="alert alert-info" role="alert" ng-hide="isAvailable()">There is no product</div>
+						<div ng-cloak class="alert alert-info" role="alert" ng-hide="isAvailable()">There is no product</div>
 						<table class="table table-bordered" ng-show="isAvailable()">
 							<thead>
 								<tr>
@@ -103,7 +103,7 @@
 							</thead>
 							<tbody ng-repeat="product in filteredProducts track by $index" ng-controller="ProductDetailController">
 								
-								<tr>
+								<tr ng-cloak>
 									<td >{{ product.productid }}</td>
 									<td style="max-width:120px;">{{ product.productname }}</td>
 									<td>{{ product.r_type }}</td>
@@ -145,7 +145,7 @@
 								</tr>
 								
 								
-								<tr ng-init="product.update=false" ng-show="product.update" >
+								<tr ng-init="product.update=false" ng-show="product.update" ng-cloak >
 									<td colspan="2"></td>
 									<td colspan="8">
 										<h4>Update Product</h4>
@@ -193,7 +193,7 @@
 								</tr>
 								
 								
-								<tr ng-init="product.upload=false" ng-show="product.upload"  >
+								<tr ng-init="product.upload=false" ng-show="product.upload" ng-cloak >
 									<td colspan="2"></td>
 									<td colspan="8">
 
@@ -218,7 +218,7 @@
 								</tr>
 								
 								
-								<tr ng-init="product.push=false" ng-show="product.push"  >
+								<tr ng-init="product.push=false" ng-show="product.push" ng-cloak  >
 									<td colspan="2"></td>
 									<td colspan="8">
 
@@ -249,7 +249,7 @@
 								</tr>
 								
 								
-								<tr ng-init="product.inventory=false" ng-show="product.inventory" ng-controller="InventoryController" >
+								<tr ng-init="product.inventory=false" ng-cloak ng-show="product.inventory" ng-controller="InventoryController" >
 									<td colspan="2"></td>
 									<td colspan="8">
 										<h4>Add / Remove Stock</h4>
