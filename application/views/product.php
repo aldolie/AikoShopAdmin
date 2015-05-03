@@ -17,7 +17,7 @@
 							<div class="form-group">
 								<label for="category" class="col-sm-4">Category</label>
 								<div class="col-sm-8">
-									<select class="form-control" ng-model="form.categoryid" name="category" >
+									<select class="form-control" ng-model="form.categoryid" name="category" ng-init="form.categoryid=1">
 										<option  ng-repeat="category in categories" value="{{::category.categoryid}}">{{category.categoryname}}</option>
 									</select>
 								</div>
@@ -43,13 +43,13 @@
 							<div class="form-group">
 								<label for="eceran" class="col-sm-4">Harga Eceran</label>
 								<div class="col-sm-8">
-									<input type="number" do-numeric  ng-model="form.hargaeceran" class="form-control" placeholder="Harga Eceran" name="eceran"  />
+									<input type="text" do-numeric  ng-model="form.hargaeceran" class="form-control" placeholder="Harga Eceran" name="eceran"  />
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<label for="type" class="col-sm-4">Type</label>
-								<div class="col-sm-8"><select ng-model="form.type" class="form-control" name="type" >
+								<div class="col-sm-8"><select ng-model="form.type" ng-init="form.type='piece'" class="form-control" name="type" >
 										<option value="piece">Piece</option>
 										<option value="series">Series</option>
 									</select>
@@ -70,6 +70,7 @@
 									<textarea  class="form-control" ng-model="form.description" placeholder="Description" name="description"  ></textarea>
 								</div>
 							</div>
+							<div class="alert alert-danger" ng-show="isError()">{{error}}</div>
 							<div class="form-group">
 								<div class="col-sm-12 control-label">
 									<input  type="submit" class="btn btn-info " value="Insert" />
@@ -183,6 +184,10 @@
 													<textarea ng-model="product.description"   class="form-control" placeholder="Description" name="description"></textarea>
 												</div>
 											</div>
+											<div ng-show="isErrorUpdate()" class="alert alert-danger">
+												{{errorUpdate}}
+											</div>
+
 											<div class="form-group">
 												<div class="col-sm-12 control-label">
 													<input  type="submit" class="btn btn-info " value="Update" />
@@ -207,12 +212,15 @@
 													<input  class="url_upload form-control" type="file" name="userfile"  onchange="angular.element(this).scope().readUrl(this)"  />
 												</div>
 											</div>
+											<div ng-show="isErrorUpload()" class="alert alert-danger">
+												{{errorUpload}}
+											</div>
 											<div class="form-group">
 												<div class="col-sm-12 control-label">
 													<input type="button" ng-click="upload()" class="submit_upload btn btn-primary" value="Upload" />
 												</div>
 											</div>
-										</form>
+									</form>
 										
 									</td>
 								</tr>

@@ -584,6 +584,20 @@ app.controller('ProductController',['$scope','productService','inventoryService'
 	$scope.categories=[];
 	$scope.filter='';
 	$scope.insertFlag=false;
+	$scope.error='';
+	$scope.form={
+		productname:'',
+		hargagrosir:'',
+		hargaeceran:'',
+		berat:'',
+		description:''
+	};
+
+	$scope.isError=function(){
+		if($scope.error=='')
+			return false;
+		return true;
+	};
 	
 	$scope.isAvailable=function(){
 		if($scope.filteredProducts.length>0){
@@ -628,18 +642,36 @@ app.controller('ProductController',['$scope','productService','inventoryService'
 	};
 	
 	$scope.insert=function(){
-		$("#modal").modal('show');
-		ps.insertProduct($scope.form).then(function(data){
-			if(data.status=='success'){
-				var productInsert=data.data;
-				productInsert.categoryname=$scope.getCategoryName(productInsert.categoryid);
-				$scope.products.push(productInsert);
-				$scope.filterProduct();
-				("#modal").modal('hide');
-			}
-		},function(){
-			$("#modal").modal('hide');
-		});
+		if($scope.form.productname==''){
+			$scope.error='Nama Produk harus diisi';
+		}
+		else if($scope.form.hargagrosir==''){
+			$scope.error='Harga Grosir harus diisi';
+		}
+		else if($scope.form.hargaeceran==''){
+			$scope.error='Harga Eceran harus diisi';
+		}
+		else if($scope.form.berat==''){
+			$scope.error='Berat harus diisi';
+		}
+		else{
+			$("#modal").modal('show');
+			ps.insertProduct($scope.form).then(function(data){
+				if(data.status=='success'){
+					var productInsert=data.data;
+					productInsert.categoryname=$scope.getCategoryName(productInsert.categoryid);
+					$scope.products.push(productInsert);
+					$scope.filterProduct();
+					$("#modal").modal('hide');
+				}
+				else if(data.status=='failed'){
+					$scope.error=data.reason;
+					$("#modal").modal('hide');
+				}
+			},function(){
+				$("#modal").modal('hide');
+			});
+		}
 		
 	}
 	
@@ -662,7 +694,19 @@ app.controller('ProductController',['$scope','productService','inventoryService'
 
 app.controller('ProductDetailController',['$scope','productService','inventoryService',function($scope,ps,is,filterFilter){
 	
-	
+	$scope.errorUpload='';
+	$scope.errorUpdate='';
+	$scope.isErrorUpload=function(){
+		if($scope.errorUpload=='')
+			return false;
+		return true;
+	};
+
+	$scope.isErrorUpdate=function(){
+		if($scope.errorUpdate=='')
+			return false;
+		return true;
+	};
 	
 	$scope.readUrl=function (input) {
 		if (input.files && input.files[0]) {
@@ -689,17 +733,33 @@ app.controller('ProductDetailController',['$scope','productService','inventorySe
 	
 	$scope.upload=function(){
 		
+		
+		if(typeof $scope.files==='undefined' || $scope.files==null){
+			$scope.errorUpload='Gambar harus di pilih';
+		}
+		else{
 		$("#modal").modal('show');
-		ps.uploadPhoto($scope.product.productid,$scope.files).then(function(data){
-			if(data.status=='success'){
-				
-				$scope.product.gambar=data.result.file_name;
-				$scope.image='http://localhost/aiko/image/items/'+$scope.product.gambar;
+			ps.uploadPhoto($scope.product.productid,$scope.files).then(function(data){
+				if(data.status=='success'){
+					
+					$scope.product.gambar=data.result.file_name;
+					$scope.image='http://localhost/aiko/image/items/'+$scope.product.gambar;
+					$("#modal").modal('hide');
+					$scope.errorUpload='Success';
+					$scope.files=null;
+				}
+				else if(data.status=='failed'){
+					$scope.errorUpload='Gagal Upload Gambar';
+					$("#modal").modal('hide');
+					$scope.files=null;
+				}
+
+			},function(){
 				$("#modal").modal('hide');
-			}
-		},function(){
-			$("#modal").modal('hide');
-		});
+				$scope.errorUpload='Unknown Error';
+				$scope.files=null;
+			});
+		}
 	
 	};
 	
@@ -762,17 +822,42 @@ app.controller('ProductDetailController',['$scope','productService','inventorySe
 	}
 	
 	$scope.update=function(){
-		$("#modal").modal('show');
-		ps.updateProduct($scope.product).then(function(data){
-			if(data.status=='success'){
-				$("#modal").modal('hide');
-				$scope.product.update=false;
+		if($scope.product.productname=='')
+		{	
+			$scope.errorUpdate='Nama Produk harus diisi';
+
+		}
+		else if($scope.product.hargagrosir==''){
+
+			$scope.errorUpdate='Harga Grosir harus diisi';
+		}
+		else if($scope.product.hargaeceran==''){
+
+			$scope.errorUpdate='Harga Eceran harus diisi';
+		}
+		else if($scope.product.berat==''){
+
+			$scope.errorUpdate='Berat harus diisi';
+		}
+		else{
+
+			$("#modal").modal('show');
+			ps.updateProduct($scope.product).then(function(data){
+				if(data.status=='success'){
+					$("#modal").modal('hide');
+					$scope.product.update=false;
+					$scope.errorUpdate='Success';
+				}
+				else if(data.status=='failed'){
+					$scope.errorUpdate=data.reason;
+					$("#modal").modal('hide');
+				}
 				
-			}
-			
-		},function(){
-			$("#modal").modal('hide');
-		});
+			},function(){
+				$("#modal").modal('hide');
+				$scope.errorUpdate='Unknown Error';
+			});
+		}
 	}
 	
 	$scope.publish=function(product){
@@ -1037,6 +1122,11 @@ app.controller('TransactionController',['$scope','transactionService','userServi
 	$scope.elementChecked=[];
 	$scope.printShow=false;
 	$scope.username;
+	$scope.form={
+		userid:0,
+		productid:0,
+		quantity:''
+	}
 	$scope.isActive=function(action){
 		if(action===$scope.mode)
 			return 'active';
@@ -1189,23 +1279,39 @@ app.controller('TransactionController',['$scope','transactionService','userServi
 	}
 	
 	$scope.buy=function(){
-		$("#modal").modal('show');
-		ts.buy($scope.form).then(function(data){
-			if(data['status']==='success')
-			{
-				$scope.productTemp.stock-=$scope.form.quantity;
-				$scope.error="Success";
+		
+		if($scope.form.userid==''||$scope.form.userid==0){
+			$scope.error='User Belum dipilih';
+		}
+		else if($scope.form.productid==''||$scope.form.productid==0){
+			$scope.error='Produk Belum dipilih';
+		}
+		else if($scope.form.quantity==''||$scope.form.productid==0)
+		{
+			$scope.error='Jumlah barang belum di isi';
+		}
+		else if(parseInt($scope.form.quantity)>parseInt($scope.productTemp.stock)){
+			$scope.error='Jumlah Stock kurang';
+		}
+		else{
+			$("#modal").modal('show');
+			ts.buy($scope.form).then(function(data){
+				if(data['status']==='success')
+				{
+					$scope.productTemp.stock-=$scope.form.quantity;
+					$scope.error="Success";
+					$("#modal").modal('hide');
+					$scope.getTransaction();
+				}
+				else{
+					$scope.error=data['error'];
+					$("#modal").modal('hide');
+				}
+			},function(){
+				$scope.error="Gagal";
 				$("#modal").modal('hide');
-				$scope.getTransaction();
-			}
-			else{
-				$scope.error=data['error'];
-				$("#modal").modal('hide');
-			}
-		},function(){
-			$scope.error="Gagal";
-			$("#modal").modal('hide');
-		});
+			});
+		}
 	}
 	
 	$scope.getTransaction=function(){

@@ -1,4 +1,22 @@
  <div class="container-fluid" ng-controller="TransactionController">
+                
+<!-- Error Dialog -->
+
+<div id="modal-save-error" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Error Message</h4>
+      </div>    
+        <div class="modal-body">
+            [[error]]
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Error Dialog -->
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 style="display:inline-block;vertical-align:top;">{{ heading }}</h1>
@@ -7,27 +25,32 @@
 						<div id="printContainer" ng-show="isPrint()">
 						<div id="printContent" style="font-size:16px !important;" >
 							<img src="<?php echo  base_url('image\icon.png'); ?>" width="50" height="50" />
-							<p  style="margin-top:10px;margin-bottom:10px;" contenteditable="true">PGTA Blok B Tanah Abang lt.3A/G/62 (08159668993)</p>
-							<table class="table table-striped" >
-								<thead>
-									<tr>
-										<th>Nama Barang</th>
-										<th>Harga Barang</th>
-										<th>Qty</th>
-										<th>Subtotal</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr ng-repeat="pr in elementChecked" ng-cloak>
-										<td>{{pr.productname}}</td>
-										<td>{{pr.harga | currency:"Rp."}}</td>
-										<td>{{pr.quantity }}</td>
-										<td>{{pr.harga*pr.quantity | currency:"Rp."}}</td>
-									</tr>
-								</tbody>
-								
-							</table>
+							<div id="dateNOW" style="float:right;">
 
+						    </div>
+						    <script>
+								var monthNames = [
+							        "Januari", "Februari", "Maret",
+							        "April", "Mei", "Juni", "July",
+							        "Agustus", "September", "Oktober",
+							        "November", "Desember"
+							    ];
+
+							    var date = new Date();
+							    var day = date.getDate();
+							    var monthIndex = date.getMonth();
+							    var year = date.getFullYear();
+							    dateNOW.innerHTML=day+' '+monthNames[monthIndex] +' '+year;
+							    </script>
+							<div style="clear:both;"></div>
+							<p  style="margin-top:10px;margin-bottom:10px;" contenteditable="true">PGTA Blok B Tanah Abang lt.3A/G/62 (08159668993)</p>
+							<hr style="border-top:1px dashed black;" />
+							<div class="row"  ng-repeat="pr in elementChecked" ng-cloak>
+								<div class="col-md-4" style="margin-top:10px;">{{pr.productname}}</div>
+								<div class="col-md-7 col-xs-offset-1">{{pr.quantity}} X {{pr.harga }} = {{pr.harga*pr.quantity }}</div>
+								
+							</div>
+							<hr style="border-top:1px dashed black;" />
 								<table class="table" >
 									<tr ng-cloak>
 										<td  width="50px">Total<td>
@@ -56,7 +79,7 @@
 									</tr>
 								</table>
 								<div style="clear:both;" contenteditable></div>
-								<div  ><span>From Aiko: </span><span contenteditable>08159668993</span></div>
+								<div  ><span >From  </span> <span contenteditable>Aiko</span> : <span contenteditable>08159668993</span></div>
 
 						</div>	
 						<div>Ongkir:<input type="numeric" ng-model="ongkir" /></div>
@@ -96,7 +119,7 @@
 							<div class="form-group">
 								<label for="Quantity" class="col-sm-4">Quantity</label>
 								<div class="col-sm-8">
-									<input type="quantity" ng-model="form.quantity"  class="form-control" placeholder="Quantity" name="email"   />
+									<input type="text" do-numeric ng-model="form.quantity"  class="form-control" placeholder="Quantity" name="email"   />
 									<p style="margin-top:10px;" ng-cloak>Stock : {{productTemp.stock}}</p>
 								</div>
 							</div>
