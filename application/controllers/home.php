@@ -99,6 +99,20 @@ class Home extends CI_Controller {
 		}
 	}
 
+	public function reportuser()
+	{
+	
+		$this->load->library('session');
+		$user=$this->session->userdata('user');
+		if($user){
+			$view_child=$this->load->view('report-user', '', true);
+			$this->load->view('view',array('view_child'=>$view_child,'user'=>$user));
+		}
+		else{
+			echo "<script>window.location.href='".base_url('signin/')."'</script>";
+		}
+	}
+
 
 	
 	public function message()

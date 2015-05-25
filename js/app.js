@@ -554,6 +554,31 @@ app.factory('transactionService',['$http','$rootScope','$q','Base64',function($h
 			});
 			return deferred.promise;
 		},
+
+		loadChart:function(from,to,type,userid){
+			var deferred=$q.defer();
+			var url=SERVICE_URL+'report_month';
+			if(userid=='undefined'||userid=='')
+			$http.post(url,{
+				'from':from,
+				'to':to,
+				'type':type
+			}).success(function(data){
+				deferred.resolve(data['result']);
+				$rootScope.$phase;
+			});
+			else
+			$http.post(url,{
+				'from':from,
+				'to':to,
+				'userid':userid,
+				'type':type
+			}).success(function(data){
+				deferred.resolve(data['result']);
+				$rootScope.$phase;
+			});
+			return deferred.promise;
+		},
 		buy:function(form){
 			var deferred=$q.defer();
 			var url=SERVICE_URL+'transaction_undef_buy';
@@ -1688,8 +1713,81 @@ app.controller('ReportController',['$scope','transactionService','userService','
 		$scope.userid=$scope.filteredUser[index].userid;
 		$scope.filteredUser=[];
 	}
+
+	$scope.total=function(){
+		var a=0;
+		for(var i=0;i<$scope.transaction.length;i++){
+			a+=($scope.transaction[i].harga*$scope.transaction[i].quantity);
+		}
+		return a;
+	}
 	
+	$scope.generateChart=function(){
+		var from=$scope.datefrom.getFullYear()+'-'+($scope.datefrom.getMonth()+1)+'-'+$scope.datefrom.getDate();
+		var to=$scope.dateto.getFullYear()+'-'+($scope.dateto.getMonth()+1)+'-'+$scope.dateto.getDate();
+		$("#modal").modal("show");
+		if($scope.userid!='')
+			ts.loadChart(from,to,$scope.type,$scope.userid).then(function(data){
+					$scope.transaction=data;
+					$scope.initChart(data);
+					$("#modal").modal("hide");
+			},function(){
+				$("#modal").modal("hide");
+			
+		});
+	}
 	
+	$scope.initChart=function(transaction){
+		
+		var labels=[];
+		var count=[];
+		for(var i=0;i<transaction.length;i++){
+			labels.push(transaction[i].transactiontime);
+			count.push(transaction[i].total_transaction);
+		}
+		if(transaction.length>0){
+		var data = {
+				    // A labels array that can contain any sort of values
+
+				    labels: labels,
+				    // Our series array that contains series objects or in this case series data arrays
+				    series: [
+				    	{name: 'Penjualan',
+				    	data:count}
+				    ]
+				  };
+			  
+		   		var options = {
+		   			height:300,
+					showPoint: true,
+			    	lineSmooth: true,
+			    	axisX: {
+					    offset: 25,
+					    labelOffset: {
+					      y: 10
+					    }
+					  },
+				  	axisY: {
+					  	onlyInteger:true,
+					    offset: 35,
+					    labelOffset: {
+					      x: -10,
+					      y: 3
+					    }
+				  	},
+			     	low: 0,
+					showArea: true
+			  	};
+		  
+		  // Create a new line chart object where as first parameter we pass in a selector
+		  // that is resolving to our chart container element. The Second parameter
+		  // is the actual data object.
+		  new Chartist.Line('.ct-chart', data,options);
+
+
+		}
+	}
+
 	$scope.generate=function(){
 		var from=$scope.datefrom.getFullYear()+'-'+($scope.datefrom.getMonth()+1)+'-'+$scope.datefrom.getDate();
 		var to=$scope.dateto.getFullYear()+'-'+($scope.dateto.getMonth()+1)+'-'+$scope.dateto.getDate();

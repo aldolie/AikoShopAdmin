@@ -66,6 +66,7 @@
 								</tr>
 							</tbody>
 						</table>
+						<div>{{total() | currency:"Rp."}}</div>
 						</div>
 						
                 </div>
