@@ -1,6 +1,6 @@
 var app=angular.module('app',[]);
-var SERVICE_URL='http://localhost/aiko/index.php/services/';
-var IMAGE='http://localhost/aiko/image/items/';
+var SERVICE_URL='http://104.199.129.2/aiko/index.php/services/';
+var IMAGE='http://104.199.129.2/aiko/image/items/';
 
 app.directive('ngEnter', function () {
     return function (scope, element, attrs) {
@@ -768,7 +768,7 @@ app.controller('ProductDetailController',['$scope','productService','inventorySe
 				if(data.status=='success'){
 					
 					$scope.product.gambar=data.result.file_name;
-					$scope.image='http://localhost/aiko/image/items/'+$scope.product.gambar;
+					$scope.image='http://104.199.129.2/aiko/image/items/'+$scope.product.gambar;
 					$("#modal").modal('hide');
 					$scope.errorUpload='Success';
 					$scope.files=null;

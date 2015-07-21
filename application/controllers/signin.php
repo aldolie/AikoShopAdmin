@@ -49,7 +49,7 @@ class Signin extends CI_Controller {
 		else
 		{
 			$curl_handle=curl_init(); 
-			curl_setopt($curl_handle, CURLOPT_URL, 'http://localhost/aiko/index.php/services/staff_signin/');
+			curl_setopt($curl_handle, CURLOPT_URL, 'http://104.199.129.2/aiko/index.php/services/staff_signin/');
 			curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
 			curl_setopt($curl_handle, CURLOPT_POST, 1);
 			curl_setopt($curl_handle, CURLOPT_POSTFIELDS, array(
